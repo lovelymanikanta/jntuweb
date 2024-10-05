@@ -1,0 +1,19 @@
+SELECT * FROM `webdata` where (catg is null or catg='')
+
+update webdata set catg1='Notifications' where catg like 'Flash,?Notifications,?Scrolling';
+
+update webdata set catg1='Notifications' ,catg2='Events' where catg1 like '%Latest Events%';
+
+SELECT * FROM `webdata` where (catg1 is null or catg1='');
+
+SELECT distinct path,
+  SUBSTRING_INDEX(path,'/','-1') AS last_occurrence from webdata where (path!='') and catg!='';
+
+SELECT 
+    REPLACE(
+        SUBSTRING_INDEX(path, '/', -4),
+        SUBSTRING_INDEX(path, '/', -1),
+        ''
+    ) AS directory_name from webdata where file!='';
+
+SELECT distinct catg1,count(*) FROM `webdata1` group by catg1;
